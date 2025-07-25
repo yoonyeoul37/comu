@@ -34,11 +34,17 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-sm">P</span>
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center space-x-2 hover:opacity-80 transition-opacity duration-200"
+            >
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">P</span>
+                </div>
               </div>
-            </div>
+              <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+            </button>
           </div>
 
           {/* Search Bar */}

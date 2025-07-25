@@ -7,7 +7,9 @@ const WritePost = () => {
     category: '',
     title: '',
     content: '',
-    tags: ''
+    nickname: '',
+    password: '',
+    images: []
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -36,11 +38,38 @@ const WritePost = () => {
     }));
   };
 
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    
+    if (formData.images.length + imageFiles.length > 5) {
+      alert('이미지는 최대 5개까지 업로드 가능합니다.');
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      images: [...prev.images, ...imageFiles]
+    }));
+  };
+
+  const removeImage = (index) => {
+    setFormData(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.category || !formData.title || !formData.content) {
-      alert('카테고리, 제목, 내용을 모두 입력해주세요.');
+    if (!formData.category || !formData.title || !formData.content || !formData.nickname || !formData.password) {
+      alert('카테고리, 제목, 내용, 닉네임, 비밀번호를 모두 입력해주세요.');
+      return;
+    }
+
+    if (formData.password.length < 4) {
+      alert('비밀번호는 4자 이상 입력해주세요.');
       return;
     }
 
@@ -123,6 +152,57 @@ const WritePost = () => {
               </div>
             </div>
 
+            {/* 닉네임 입력 */}
+            <div className="mb-6">
+              <label htmlFor="nickname" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                닉네임 *
+              </label>
+              <input
+                type="text"
+                id="nickname"
+                name="nickname"
+                value={formData.nickname}
+                onChange={handleInputChange}
+                placeholder="닉네임을 입력하세요"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-primary-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
+                maxLength={20}
+              />
+              <div className="flex justify-between items-center mt-1">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  게시글에 표시될 닉네임입니다
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {formData.nickname.length}/20
+                </span>
+              </div>
+            </div>
+
+            {/* 비밀번호 입력 */}
+            <div className="mb-6">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                비밀번호 *
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="비밀번호를 입력하세요 (4자 이상)"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-primary-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
+                minLength={4}
+                maxLength={20}
+              />
+              <div className="flex justify-between items-center mt-1">
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  게시글 수정/삭제 시 필요합니다
+                </span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">
+                  {formData.password.length}/20
+                </span>
+              </div>
+            </div>
+
             {/* 제목 입력 */}
             <div className="mb-6">
               <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -173,23 +253,57 @@ const WritePost = () => {
               </div>
             </div>
 
-            {/* 태그 입력 */}
+            {/* 이미지 업로드 */}
             <div className="mb-8">
-              <label htmlFor="tags" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                태그 (선택사항)
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                이미지 첨부 (선택사항)
               </label>
-              <input
-                type="text"
-                id="tags"
-                name="tags"
-                value={formData.tags}
-                onChange={handleInputChange}
-                placeholder="태그를 쉼표로 구분하여 입력하세요 (예: 고민, 조언, 공감)"
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:border-primary-500 dark:bg-gray-700 dark:text-white transition-all duration-200"
-              />
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                관련 태그를 입력하면 다른 사용자가 쉽게 찾을 수 있습니다
-              </p>
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleImageUpload}
+                  className="hidden"
+                  id="image-upload"
+                />
+                <label htmlFor="image-upload" className="cursor-pointer">
+                  <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                    <span className="font-medium text-primary-600 dark:text-primary-400 hover:text-primary-500">클릭하여 이미지 업로드</span>
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    PNG, JPG, GIF 최대 5개 (각 5MB 이하)
+                  </p>
+                </label>
+              </div>
+
+              {/* 업로드된 이미지 미리보기 */}
+              {formData.images.length > 0 && (
+                <div className="mt-4">
+                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">업로드된 이미지</h4>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {formData.images.map((image, index) => (
+                      <div key={index} className="relative group">
+                        <img
+                          src={URL.createObjectURL(image)}
+                          alt={`업로드된 이미지 ${index + 1}`}
+                          className="w-full h-24 object-cover rounded-lg"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => removeImage(index)}
+                          className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors duration-200"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* 버튼 그룹 */}
@@ -203,7 +317,7 @@ const WritePost = () => {
               </button>
               <button
                 type="submit"
-                disabled={isSubmitting || !formData.category || !formData.title || !formData.content}
+                disabled={isSubmitting || !formData.category || !formData.title || !formData.content || !formData.nickname || !formData.password}
                 className="px-6 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center space-x-2"
               >
                 {isSubmitting ? (

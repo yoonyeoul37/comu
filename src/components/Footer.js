@@ -1,6 +1,8 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -9,12 +11,15 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* 로고 및 설명 */}
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
+            <button
+              onClick={() => navigate('/')}
+              className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity duration-200"
+            >
               <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-bold text-sm">P</span>
               </div>
               <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
-            </div>
+            </button>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               익명으로 자유롭게 소통하는 커뮤니티입니다.
               서로의 이야기를 듣고 공감하며 함께 성장해나가요.

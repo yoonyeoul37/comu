@@ -36,11 +36,22 @@ interface ProductCardProps {
 // 메인 페이지 컴포넌트
 const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handlePostClick = (postId: string) => {
     navigate(`/post/${postId}`);
   };
+
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(selectedCategory === category ? null : category);
+    setCurrentPage(1); // 카테고리 변경 시 첫 페이지로
+  };
+
+  // 선택된 카테고리에 따라 글 필터링
+  const filteredPosts = selectedCategory 
+    ? posts.filter(post => post.category === selectedCategory)
+    : posts;
 
   const ProductCard: React.FC<ProductCardProps> = ({ post, rank }) => {
     const [isUpvoted, setIsUpvoted] = useState(false);
@@ -139,7 +150,7 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
   };
 
   const Pagination = () => {
-    const totalPages = Math.ceil(posts.length / 20);
+    const totalPages = Math.ceil(filteredPosts.length / 20);
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
@@ -204,32 +215,50 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
                   {/* Section Header */}
                   <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">인기 게시글</h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">커뮤니티에서 가장 인기 있는 게시글들을 확인하세요</p>
-                    </div>
-                    <button className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium">
-                      모든 게시글 보기
-                    </button>
+                                         <div>
+                       <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                         {selectedCategory ? `${selectedCategory} 게시글` : '인기 게시글'}
+                       </h2>
+                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                         {selectedCategory 
+                           ? `${selectedCategory} 카테고리의 게시글들을 확인하세요` 
+                           : '커뮤니티에서 가장 인기 있는 게시글들을 확인하세요'
+                         }
+                       </p>
+                     </div>
+                                         <button 
+                       onClick={() => {
+                         setSelectedCategory(null);
+                         setCurrentPage(1);
+                       }}
+                       className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                     >
+                       전체글
+                     </button>
                   </div>
 
-                  {/* Category Labels */}
-                  <div className="mb-6">
-                    <div className="flex flex-wrap gap-2">
-                      {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대'].map((category) => (
-                        <button
-                          key={category}
-                          className="px-3 py-1.5 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200"
-                        >
-                          {category}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                                     {/* Category Labels */}
+                   <div className="mb-6">
+                     <div className="flex flex-wrap gap-2">
+                       {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대'].map((category) => (
+                         <button
+                           key={category}
+                           onClick={() => handleCategoryClick(category)}
+                           className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                             selectedCategory === category
+                               ? 'bg-primary-600 text-white'
+                               : 'text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+                           }`}
+                         >
+                           {category}
+                         </button>
+                       ))}
+                     </div>
+                   </div>
 
-                  {/* All Posts with Advertisements */}
-                  <div className="space-y-1">
-                    {posts.map((post, index) => (
+                                     {/* All Posts with Advertisements */}
+                   <div className="space-y-1">
+                     {filteredPosts.map((post, index) => (
                       <React.Fragment key={post.id}>
                         <ProductCard post={post} rank={index + 1} />
                         {/* Advertisement after 10th post */}
@@ -278,7 +307,9 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
             {/* Sidebar */}
             <div className="hidden lg:block w-72">
-              <Sidebar isDarkMode={isDarkMode} />
+              <div className="sticky top-4">
+                <Sidebar isDarkMode={isDarkMode} />
+              </div>
             </div>
           </div>
         </div>
