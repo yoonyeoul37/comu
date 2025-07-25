@@ -68,7 +68,7 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
     };
 
     return (
-      <div className="flex items-start space-x-4 p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+             <div className="flex items-start space-x-4 p-4 hover:bg-gray-200 dark:hover:bg-gray-700 hover:rounded-lg transition-all duration-200">
         {/* Rank */}
         <div className="flex-shrink-0 w-8 text-center">
           <span className="text-lg font-bold text-gray-400 dark:text-gray-500">{rank}.</span>
@@ -157,12 +157,12 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
              {/* Content */}
              <div className="flex-1 min-w-0">
-               <h3 
-                 className="text-lg font-semibold text-gray-900 dark:text-white mb-1 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer"
-                 onClick={() => handlePostClick(post.id)}
-               >
-                 {post.title}
-               </h3>
+                               <h3 
+                  className="text-lg font-semibold text-gray-900 dark:text-white mb-1 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer"
+                  onClick={() => handlePostClick(post.id)}
+                >
+                  {post.title}
+                </h3>
                <p className="text-sm text-gray-600 dark:text-gray-300 mb-2 line-clamp-2">
                  {post.summary}
                </p>
