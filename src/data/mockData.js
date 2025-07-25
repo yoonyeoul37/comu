@@ -23,7 +23,8 @@ export const posts = [
     comments: 23,
     category: '시댁',
     createdAt: '2024-01-15',
-    tags: ['시댁', '첫만남', '준비']
+    tags: ['시댁', '첫만남', '준비'],
+    images: ['https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=200&fit=crop']
   },
   {
     id: '2',
@@ -55,7 +56,8 @@ export const posts = [
     comments: 31,
     category: '이혼',
     createdAt: '2024-01-13',
-    tags: ['이혼', '새시작', '치유']
+    tags: ['이혼', '새시작', '치유'],
+    images: ['https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=400&h=200&fit=crop', 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=200&fit=crop']
   },
   {
     id: '4',
@@ -87,7 +89,8 @@ export const posts = [
     comments: 28,
     category: '동료',
     createdAt: '2024-01-11',
-    tags: ['동료', '갈등', '직장']
+    tags: ['동료', '갈등', '직장'],
+    images: ['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=200&fit=crop']
   },
   {
     id: '6',
@@ -151,7 +154,8 @@ export const posts = [
     comments: 25,
     category: '남편',
     createdAt: '2024-01-07',
-    tags: ['남편', '데이트', '로맨틱']
+    tags: ['남편', '데이트', '로맨틱'],
+    images: ['https://images.unsplash.com/photo-1557838923-2985c318be48?w=400&h=200&fit=crop', 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?w=400&h=200&fit=crop', 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop']
   },
   {
     id: '10',
