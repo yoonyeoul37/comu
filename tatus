@@ -1,4 +1,7 @@
-[33m1868b980[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Add anonymous community features and UI improvements
+[33m72baa543[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m 댓글 작성 시 닉네임과 비밀번호 입력 필드 추가 및 포커스 스타일 개선
+[33mac7253c5[m 마우스 호버 시 배경 둥글게 처리 및 전환 효과 개선
+[33m374c65cb[m 이미지 표기 아이콘 추가 및 mockData 업데이트
+[33m1868b980[m Add anonymous community features and UI improvements
 [33m96717fe4[m 작업한 내용
 [33m8dca7734[m 처음 커밋
 [33ma5853f3a[m Initial commit
