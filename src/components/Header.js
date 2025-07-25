@@ -71,23 +71,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
 
           {/* Navigation */}
           <div className="flex items-center space-x-6">
-            <button className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200">
-              출시
-            </button>
-            <button className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200">
-              상품
-            </button>
-            <button className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200">
-              뉴스
-            </button>
-            <button className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200">
-              포럼
-            </button>
-            <button className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-3 py-2 text-sm font-medium transition-colors duration-200">
-              광고
-            </button>
-
-            {/* Dark Mode Toggle */}
+            {/* 다크모드 토글 */}
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
