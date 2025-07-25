@@ -57,7 +57,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
               </div>
               <input
                 type="text"
-                className={`block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 ${
+                className={`block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-gray-100 dark:bg-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white focus:outline-none focus:placeholder-gray-400 dark:focus:placeholder-gray-500 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200 ${
                   isSearchFocused ? 'ring-2 ring-primary-500 border-transparent' : ''
                 }`}
                 placeholder="검색 (Ctrl+K)"

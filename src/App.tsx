@@ -400,7 +400,7 @@ const PostDetailPage: React.FC<PostDetailPageProps> = ({ isDarkMode, toggleDarkM
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
       <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <div className="flex-1">
-        <PostDetail postId={postId} />
+        <PostDetail postId={postId} isDarkMode={isDarkMode} />
       </div>
       <Footer />
     </div>
