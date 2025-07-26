@@ -37,7 +37,7 @@ const Footer = () => {
     <>
       <footer className="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* 로고 및 설명 */}
             <div className="col-span-1 md:col-span-2">
               <button
@@ -72,56 +72,41 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* 커뮤니티 */}
-            <div>
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">커뮤니티</h3>
-              <ul className="space-y-2">
-                <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-                    가이드라인
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-                    자주 묻는 질문
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-                    신고하기
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-                    건의사항
-                  </a>
-                </li>
-              </ul>
-            </div>
-
             {/* 정보 */}
             <div>
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">정보</h3>
               <ul className="space-y-2">
                 <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                  <button
+                    onClick={() => navigate('/terms')}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+                  >
                     이용약관
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                  <button
+                    onClick={() => navigate('/privacy')}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+                  >
                     개인정보처리방침
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
+                  <button
+                    onClick={() => navigate('/cookie')}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+                  >
                     쿠키 정책
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200">
-                    문의하기
-                  </a>
+                  <button
+                    onClick={() => navigate('/ad-inquiry')}
+                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors duration-200"
+                  >
+                    광고문의
+                  </button>
                 </li>
               </ul>
             </div>
