@@ -13,10 +13,14 @@ const PrivacyPolicy = () => {
             onClick={() => navigate('/')}
             className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity duration-200"
           >
-            <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-200">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 20L7 4H9L13 20H11L10 16H6L5 20H3ZM7.5 14H8.5L8 12L7.5 14Z"/>
+                <path d="M15 20L19 4H21L25 20H23L22 16H18L17 20H15ZM17.5 14H18.5L18 12L17.5 14Z"/>
+              </svg>
             </div>
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">위티</span>
+                            <span className="text-sm font-medium text-gray-600 dark:text-gray-400 ml-1">WITTY</span>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">개인정보처리방침</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">마지막 업데이트: 2024년 1월 1일</p>
@@ -27,7 +31,7 @@ const PrivacyPolicy = () => {
           <div className="prose prose-gray dark:prose-invert max-w-none">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">1. 개인정보 수집 항목</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              미미룸은 익명 커뮤니티 서비스로, 최소한의 개인정보만 수집합니다.
+              위티는 익명 커뮤니티 서비스로, 최소한의 개인정보만 수집합니다.
             </p>
             <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-6 space-y-2">
               <li><strong>IP 주소:</strong> 서버 로그에 자동으로 기록되는 기술적 정보</li>
@@ -53,7 +57,7 @@ const PrivacyPolicy = () => {
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">4. 개인정보 제3자 제공</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              미미룸은 원칙적으로 개인정보를 제3자에게 제공하지 않습니다. 
+              위티는 원칙적으로 개인정보를 제3자에게 제공하지 않습니다. 
               다만, 법령에 의거하거나 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우 제공할 수 있습니다.
             </p>
 
@@ -74,7 +78,7 @@ const PrivacyPolicy = () => {
             <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg mb-6">
               <p className="text-gray-700 dark:text-gray-300">
                 <strong>개인정보 보호책임자</strong><br />
-                이메일: privacy@mimiroom.com<br />
+                                 이메일: privacy@witty.com<br />
                 연락처: 관리자 페이지를 통한 문의
               </p>
             </div>

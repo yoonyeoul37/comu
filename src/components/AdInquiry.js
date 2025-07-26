@@ -13,13 +13,17 @@ const AdInquiry = () => {
             onClick={() => navigate('/')}
             className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity duration-200"
           >
-            <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-200">
+              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 20L7 4H9L13 20H11L10 16H6L5 20H3ZM7.5 14H8.5L8 12L7.5 14Z"/>
+                <path d="M15 20L19 4H21L25 20H23L22 16H18L17 20H15ZM17.5 14H18.5L18 12L17.5 14Z"/>
+              </svg>
             </div>
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">위티</span>
+                            <span className="text-sm font-medium text-gray-600 dark:text-gray-400 ml-1">WITTY</span>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">광고문의</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">미미룸에서 광고를 게재하고 싶으신가요?</p>
+                     <p className="text-gray-600 dark:text-gray-400 mt-2">위티에서 광고를 게재하고 싶으신가요?</p>
         </div>
 
         {/* 광고 위치 안내 */}
