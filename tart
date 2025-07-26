@@ -37,3 +37,4 @@
 
   /_p_a_t_t_e_r_n          *  Search forward for (_N-th) matching line.
   ?_p_a_t_t_e_r_n          *  Search backward for (_N-th) matching line.
+  n                 *  Repeat previous search (for _N-th occurrence).

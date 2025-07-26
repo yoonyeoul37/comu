@@ -73,15 +73,15 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
     };
 
     return (
-      <div className="flex items-start space-x-4 p-4 hover:bg-gray-200 dark:hover:bg-gray-700 hover:rounded-lg transition-all duration-200">
-        <div className="flex-shrink-0 w-8 text-center">
-          <span className="text-lg font-bold text-gray-400 dark:text-gray-500">{rank}.</span>
+      <div className="flex items-start space-x-2 sm:space-x-4 p-3 sm:p-4 hover:bg-gray-200 dark:hover:bg-gray-700 hover:rounded-lg transition-all duration-200">
+        <div className="flex-shrink-0 w-6 sm:w-8 text-center">
+          <span className="text-sm sm:text-lg font-bold text-gray-400 dark:text-gray-500">{rank}.</span>
         </div>
 
         <div className="flex-1 min-w-0">
-          <div className="flex items-start space-x-3">
+          <div className="flex items-start space-x-2 sm:space-x-3">
             <div className="flex-shrink-0">
-              <div className="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+              <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
                 <span className="text-lg text-gray-600 dark:text-gray-400">
                   {post.category === '시댁' && (
                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
@@ -159,18 +159,19 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
             <div className="flex-1 min-w-0">
               <h3 
-                className="text-lg font-semibold text-gray-900 dark:text-white mb-1 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer"
+                className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-1 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer line-clamp-2"
                 onClick={() => handlePostClick(post.id)}
               >
                 {post.title}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-2 line-clamp-2">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300 mb-2 line-clamp-2">
                 {post.summary}
               </p>
-              <div className="flex items-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+              <div className="flex items-center space-x-1 sm:space-x-2 text-xs text-gray-500 dark:text-gray-400">
                 <span>{new Date(post.createdAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' })}</span>
                 <span>•</span>
-                <span>{post.author.name}</span>
+                <span className="hidden sm:inline">{post.author.name}</span>
+                <span className="sm:hidden">{post.author.name.length > 3 ? post.author.name.substring(0, 3) + '...' : post.author.name}</span>
                 <span>•</span>
                 <span className="flex items-center space-x-1">
                   <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -258,10 +259,10 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
       <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <main className="flex-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             <div className="flex-1">
               <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-                <div className="p-6">
+                <div className="p-4 sm:p-6">
                   <div className="mb-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg border border-primary-200 dark:border-primary-700">
                     <div className="flex items-center space-x-4">
                       <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
@@ -276,9 +277,9 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
                     <div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                         {selectedCategory ? `${selectedCategory} 게시글` : '인기 게시글'}
                       </h2>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
@@ -293,19 +294,19 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
                         setSelectedCategory(null);
                         setCurrentPage(1);
                       }}
-                      className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                      className="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium self-start sm:self-auto"
                     >
                       전체글
                     </button>
                   </div>
 
                   <div className="mb-6">
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
                       {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대'].map((category) => (
                         <button
                           key={category}
                           onClick={() => handleCategoryClick(category)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                          className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap ${
                             selectedCategory === category
                               ? 'bg-primary-600 text-white'
                               : 'text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -362,8 +363,8 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
               </div>
             </div>
 
-            <div className="hidden lg:block w-72">
-              <div className="sticky top-4">
+            <div className="w-full lg:w-80 flex-shrink-0">
+              <div className="lg:sticky lg:top-4">
                 <Sidebar isDarkMode={isDarkMode} />
               </div>
             </div>
