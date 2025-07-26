@@ -302,7 +302,7 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
                   <div className="mb-6">
                     <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
-                      {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대', '재혼', '여행', '알바', '주식', '도박', '사업', '미용', '요리', '운동', '쇼핑', '육아', '임신'].map((category) => (
+                      {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대', '재혼', '여행', '알바', '주식', '출산', '사업', '미용', '요리', '운동', '쇼핑', '육아', '임신'].map((category) => (
                         <button
                           key={category}
                           onClick={() => handleCategoryClick(category)}
