@@ -122,19 +122,28 @@ const Sidebar = ({ isDarkMode }) => {
         <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600 dark:text-gray-300">총 게시글</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">12,847</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">{posts.length.toLocaleString()}</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600 dark:text-gray-300">오늘 게시글</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">156</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {posts.filter(post => {
+                const today = new Date().toISOString().split('T')[0];
+                return post.createdAt === today;
+              }).length}
+            </span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600 dark:text-gray-300">총 댓글</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">89,234</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {posts.reduce((total, post) => total + post.comments, 0).toLocaleString()}
+            </span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600 dark:text-gray-300">활성 사용자</span>
-            <span className="text-sm font-medium text-gray-900 dark:text-white">2,341</span>
+            <span className="text-sm font-medium text-gray-900 dark:text-white">
+              {new Set(posts.map(post => post.author.name)).size}
+            </span>
           </div>
         </div>
       </div>
