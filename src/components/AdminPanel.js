@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const AdminPanel = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginCredentials, setLoginCredentials] = useState({
+    username: '',
+    password: ''
+  });
+  const [loginError, setLoginError] = useState('');
   const [activeTab, setActiveTab] = useState('ads');
   const [posts, setPosts] = useState([]);
   const [comments, setComments] = useState([]);
@@ -20,6 +26,120 @@ const AdminPanel = () => {
   });
   const navigate = useNavigate();
 
+  // 관리자 계정 정보 (실제로는 서버에서 검증)
+  const adminCredentials = {
+    username: 'admin',
+    password: 'admin123'
+  };
+
+  // 로그인 처리
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setLoginError('');
+
+    if (loginCredentials.username === adminCredentials.username && 
+        loginCredentials.password === adminCredentials.password) {
+      setIsLoggedIn(true);
+      setLoginCredentials({ username: '', password: '' });
+    } else {
+      setLoginError('아이디 또는 비밀번호가 올바르지 않습니다.');
+    }
+  };
+
+  // 로그아웃 처리
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setActiveTab('ads');
+    setSelectedItems([]);
+    setShowAdModal(false);
+  };
+
+  // 로그인 폼 렌더링
+  const renderLoginForm = () => (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <div className="mx-auto h-12 w-12 bg-primary-600 rounded-full flex items-center justify-center">
+            <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37.27-.165.57-.293.88-.38z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
+            관리자 로그인
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            관리자 계정으로 로그인하세요
+          </p>
+        </div>
+        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
+          <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="username" className="sr-only">아이디</label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                required
+                value={loginCredentials.username}
+                onChange={(e) => setLoginCredentials(prev => ({ ...prev, username: e.target.value }))}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-t-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm dark:bg-gray-700"
+                placeholder="아이디"
+              />
+            </div>
+            <div>
+              <label htmlFor="password" className="sr-only">비밀번호</label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                value={loginCredentials.password}
+                onChange={(e) => setLoginCredentials(prev => ({ ...prev, password: e.target.value }))}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-b-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:z-10 sm:text-sm dark:bg-gray-700"
+                placeholder="비밀번호"
+              />
+            </div>
+          </div>
+
+          {loginError && (
+            <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md p-4">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm text-red-800 dark:text-red-200">{loginError}</p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+            >
+              로그인
+            </button>
+          </div>
+
+          <div className="text-center">
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+              className="text-sm text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+            >
+              메인으로 돌아가기
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+
   // 탭 목록
   const tabs = [
     { id: 'ads', name: '광고 관리', icon: '📢' },
@@ -30,8 +150,15 @@ const AdminPanel = () => {
 
   // 모의 데이터 로드
   useEffect(() => {
-    loadMockData();
-  }, []);
+    if (isLoggedIn) {
+      loadMockData();
+    }
+  }, [isLoggedIn]);
+
+  // 로그인하지 않은 경우 로그인 폼 표시
+  if (!isLoggedIn) {
+    return renderLoginForm();
+  }
 
   const loadMockData = () => {
     // 게시글 데이터
@@ -54,10 +181,10 @@ const AdminPanel = () => {
 
     // 광고 데이터
     const mockAds = [
-             { id: 1, title: 'qkRnjwnj 새로운 기능 제품', content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.', position: 'main', status: 'active', views: 1250, clicks: 89, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-       { id: 2, title: '메인 중앙 광고', content: '메인 중앙에 표시되는 광고입니다.', position: 'list-middle', status: 'active', views: 650, clicks: 32, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-       { id: 3, title: '메인 하단 광고', content: '메인 하단에 표시되는 광고입니다.', position: 'list-end', status: 'active', views: 420, clicks: 18, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-       { id: 4, title: '스티키 하단 광고', content: '화면 하단에 고정된 스티키 광고입니다.', position: 'sticky-bottom', status: 'active', views: 1200, clicks: 95, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' }
+      { id: 1, title: 'qkRnjwnj 새로운 기능 제품', content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.', position: 'main', status: 'active', views: 1250, clicks: 89, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+      { id: 2, title: '메인 중앙 광고', content: '메인 중앙에 표시되는 광고입니다.', position: 'list-middle', status: 'active', views: 650, clicks: 32, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+      { id: 3, title: '메인 하단 광고', content: '메인 하단에 표시되는 광고입니다.', position: 'list-end', status: 'active', views: 420, clicks: 18, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+      { id: 4, title: '스티키 하단 광고', content: '화면 하단에 고정된 스티키 광고입니다.', position: 'sticky-bottom', status: 'active', views: 1200, clicks: 95, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' }
     ];
 
     setPosts(mockPosts);
@@ -214,12 +341,12 @@ const AdminPanel = () => {
                     ad.position === 'sticky-bottom' ? 'bg-red-100 text-red-800' :
                     'bg-gray-100 text-gray-800'
                   }`}>
-                                         {ad.position === 'main' ? '메인 상단' :
-                      ad.position === 'detail' ? '상세페이지 상단' :
-                      ad.position === 'comments' ? '상세페이지 댓글' :
-                      ad.position === 'list-middle' ? '메인 중앙' :
-                      ad.position === 'list-end' ? '메인 하단' :
-                      ad.position === 'sticky-bottom' ? '스티키' : ad.position}
+                    {ad.position === 'main' ? '메인 상단' :
+                     ad.position === 'detail' ? '상세페이지 상단' :
+                     ad.position === 'comments' ? '상세페이지 댓글' :
+                     ad.position === 'list-middle' ? '메인 중앙' :
+                     ad.position === 'list-end' ? '메인 하단' :
+                     ad.position === 'sticky-bottom' ? '스티키' : ad.position}
                   </span>
                   <span>조회수: {ad.views}</span>
                   <span>클릭수: {ad.clicks}</span>
@@ -449,12 +576,20 @@ const AdminPanel = () => {
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white">관리자 패널</h1>
               <p className="text-gray-600 dark:text-gray-400 mt-2">커뮤니티 관리 및 모니터링</p>
             </div>
-            <button
-              onClick={() => navigate('/')}
-              className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              메인으로 돌아가기
-            </button>
+            <div className="flex space-x-3">
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              >
+                로그아웃
+              </button>
+              <button
+                onClick={() => navigate('/')}
+                className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+              >
+                메인으로 돌아가기
+              </button>
+            </div>
           </div>
         </div>
 
@@ -512,37 +647,37 @@ const AdminPanel = () => {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       광고 제목 *
                     </label>
-                                         <input
-                       type="text"
-                       value={newAd.title}
-                       onChange={(e) => setNewAd(prev => ({ ...prev, title: e.target.value }))}
-                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                       placeholder="광고 제목을 입력하세요"
-                     />
+                    <input
+                      type="text"
+                      value={newAd.title}
+                      onChange={(e) => setNewAd(prev => ({ ...prev, title: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      placeholder="광고 제목을 입력하세요"
+                    />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       광고 내용 *
                     </label>
-                                         <textarea
-                       value={newAd.content}
-                       onChange={(e) => setNewAd(prev => ({ ...prev, content: e.target.value }))}
-                       rows={3}
-                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                       placeholder="광고 내용을 입력하세요"
-                     />
+                    <textarea
+                      value={newAd.content}
+                      onChange={(e) => setNewAd(prev => ({ ...prev, content: e.target.value }))}
+                      rows={3}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      placeholder="광고 내용을 입력하세요"
+                    />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       표시 위치 *
                     </label>
-                                         <select
-                       value={newAd.position}
-                       onChange={(e) => setNewAd(prev => ({ ...prev, position: e.target.value }))}
-                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                     >
+                    <select
+                      value={newAd.position}
+                      onChange={(e) => setNewAd(prev => ({ ...prev, position: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                    >
                       <option value="main">메인 상단 (상세페이지 상단에 자동 표시)</option>
                       <option value="list-middle">메인 중앙 (상세페이지 댓글 사이에 자동 표시)</option>
                       <option value="list-end">메인 하단 (상세페이지 미표시)</option>
@@ -555,24 +690,24 @@ const AdminPanel = () => {
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         시작 날짜 *
                       </label>
-                                             <input
-                         type="date"
-                         value={newAd.startDate}
-                         onChange={(e) => setNewAd(prev => ({ ...prev, startDate: e.target.value }))}
-                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                       />
+                      <input
+                        type="date"
+                        value={newAd.startDate}
+                        onChange={(e) => setNewAd(prev => ({ ...prev, startDate: e.target.value }))}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         종료 날짜 *
                       </label>
-                                             <input
-                         type="date"
-                         value={newAd.endDate}
-                         onChange={(e) => setNewAd(prev => ({ ...prev, endDate: e.target.value }))}
-                         className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                       />
+                      <input
+                        type="date"
+                        value={newAd.endDate}
+                        onChange={(e) => setNewAd(prev => ({ ...prev, endDate: e.target.value }))}
+                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      />
                     </div>
                   </div>
 
@@ -580,24 +715,24 @@ const AdminPanel = () => {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       이미지 URL (선택사항)
                     </label>
-                                         <input
-                       type="url"
-                       value={newAd.imageUrl}
-                       onChange={(e) => setNewAd(prev => ({ ...prev, imageUrl: e.target.value }))}
-                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                       placeholder="https://example.com/image.jpg"
-                     />
+                    <input
+                      type="url"
+                      value={newAd.imageUrl}
+                      onChange={(e) => setNewAd(prev => ({ ...prev, imageUrl: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                      placeholder="https://example.com/image.jpg"
+                    />
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       상태
                     </label>
-                                         <select
-                       value={newAd.status}
-                       onChange={(e) => setNewAd(prev => ({ ...prev, status: e.target.value }))}
-                       className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
-                     >
+                    <select
+                      value={newAd.status}
+                      onChange={(e) => setNewAd(prev => ({ ...prev, status: e.target.value }))}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
+                    >
                       <option value="active">활성</option>
                       <option value="inactive">비활성</option>
                     </select>
