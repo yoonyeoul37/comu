@@ -4,6 +4,7 @@ import Header from './components/Header.js';
 import Sidebar from './components/Sidebar.js';
 import PostDetail from './components/PostDetail.js';
 import WritePost from './components/WritePost.js';
+import AdminPanel from './components/AdminPanel.js';
 import Footer from './components/Footer.js';
 import { posts, categories } from './data/mockData.js';
 
@@ -425,6 +426,24 @@ const WritePostPage: React.FC<WritePostPageProps> = ({ isDarkMode, toggleDarkMod
   );
 };
 
+// 관리자 페이지 컴포넌트
+interface AdminPageProps {
+  isDarkMode: boolean;
+  toggleDarkMode: () => void;
+}
+
+const AdminPage: React.FC<AdminPageProps> = ({ isDarkMode, toggleDarkMode }) => {
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex flex-col">
+      <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      <div className="flex-1">
+        <AdminPanel />
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
 // 메인 App 컴포넌트
 const App: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -449,6 +468,7 @@ const App: React.FC = () => {
         <Route path="/" element={<HomePage isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
         <Route path="/post/:postId" element={<PostDetailPage isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
         <Route path="/write" element={<WritePostPage isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
+        <Route path="/admin" element={<AdminPage isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />} />
       </Routes>
     </Router>
   );
