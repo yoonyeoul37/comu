@@ -54,11 +54,10 @@ const AdminPanel = () => {
 
     // 광고 데이터
     const mockAds = [
-      { id: 1, title: 'qkRnjwnj 새로운 기능 제품', content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.', position: 'main', status: 'active', views: 1250, clicks: 89, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-      { id: 2, title: '상세페이지 광고', content: '상세페이지 상단 광고입니다.', position: 'detail', status: 'active', views: 890, clicks: 45, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-      { id: 3, title: '댓글 사이 광고', content: '댓글과 전체글 사이 광고입니다.', position: 'comments', status: 'inactive', views: 0, clicks: 0, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-      { id: 4, title: '리스트 중앙 광고', content: '리스트 중앙에 표시되는 광고입니다.', position: 'list-middle', status: 'active', views: 650, clicks: 32, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
-      { id: 5, title: '리스트 끝 광고', content: '리스트 끝에 표시되는 광고입니다.', position: 'list-end', status: 'active', views: 420, clicks: 18, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' }
+             { id: 1, title: 'qkRnjwnj 새로운 기능 제품', content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.', position: 'main', status: 'active', views: 1250, clicks: 89, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+       { id: 2, title: '메인 중앙 광고', content: '메인 중앙에 표시되는 광고입니다.', position: 'list-middle', status: 'active', views: 650, clicks: 32, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+       { id: 3, title: '메인 하단 광고', content: '메인 하단에 표시되는 광고입니다.', position: 'list-end', status: 'active', views: 420, clicks: 18, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' },
+       { id: 4, title: '스티키 하단 광고', content: '화면 하단에 고정된 스티키 광고입니다.', position: 'sticky-bottom', status: 'active', views: 1200, clicks: 95, startDate: '2024-01-01', endDate: '2024-12-31', imageUrl: '' }
     ];
 
     setPosts(mockPosts);
@@ -211,13 +210,16 @@ const AdminPanel = () => {
                     ad.position === 'detail' ? 'bg-purple-100 text-purple-800' :
                     ad.position === 'comments' ? 'bg-orange-100 text-orange-800' :
                     ad.position === 'list-middle' ? 'bg-green-100 text-green-800' :
+                    ad.position === 'list-end' ? 'bg-gray-100 text-gray-800' :
+                    ad.position === 'sticky-bottom' ? 'bg-red-100 text-red-800' :
                     'bg-gray-100 text-gray-800'
                   }`}>
-                    {ad.position === 'main' ? '메인 상단' :
-                     ad.position === 'detail' ? '상세페이지' :
-                     ad.position === 'comments' ? '댓글 사이' :
-                     ad.position === 'list-middle' ? '리스트 중앙' :
-                     ad.position === 'list-end' ? '리스트 끝' : ad.position}
+                                         {ad.position === 'main' ? '메인 상단' :
+                      ad.position === 'detail' ? '상세페이지 상단' :
+                      ad.position === 'comments' ? '상세페이지 댓글' :
+                      ad.position === 'list-middle' ? '메인 중앙' :
+                      ad.position === 'list-end' ? '메인 하단' :
+                      ad.position === 'sticky-bottom' ? '스티키' : ad.position}
                   </span>
                   <span>조회수: {ad.views}</span>
                   <span>클릭수: {ad.clicks}</span>
@@ -541,11 +543,10 @@ const AdminPanel = () => {
                        onChange={(e) => setNewAd(prev => ({ ...prev, position: e.target.value }))}
                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none dark:bg-gray-700 dark:text-white"
                      >
-                      <option value="main">메인 상단</option>
-                      <option value="detail">상세페이지 상단</option>
-                      <option value="comments">댓글 사이</option>
-                      <option value="list-middle">리스트 중앙</option>
-                      <option value="list-end">리스트 끝</option>
+                      <option value="main">메인 상단 (상세페이지 상단에 자동 표시)</option>
+                      <option value="list-middle">메인 중앙 (상세페이지 댓글 사이에 자동 표시)</option>
+                      <option value="list-end">메인 하단 (상세페이지 미표시)</option>
+                      <option value="sticky-bottom">스티키 (전체 페이지 하단 고정)</option>
                     </select>
                   </div>
 
