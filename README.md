@@ -64,5 +64,5 @@ http://localhost:3000
 
 MIT License 
 =======
-# 위티
+# 달녀들
 >>>>>>> a5853f3a54fb25db8bea3742fadad155300d6f86

@@ -54,8 +54,17 @@ const Footer = () => {
                   </svg>
                 </div>
                                  <div className="flex flex-col">
-                   <span className="text-2xl font-bold text-gray-900 dark:text-white" style={{ fontFamily: 'Noto Sans KR, sans-serif', transform: 'skewX(5deg)' }}>달녀들</span>
-                   <span className="text-sm font-medium text-gray-600 dark:text-gray-400 italic">DNY.CO.KR</span>
+                   <span 
+                     className="text-2xl font-bold text-gray-900 dark:text-white hover:animate-float" 
+                     style={{ 
+                       fontFamily: 'Noto Sans KR, sans-serif', 
+                       transform: 'skewX(5deg)',
+                       animation: 'float 3s ease-in-out infinite'
+                     }}
+                   >
+                     달녀들
+                   </span>
+                                       <span className="text-sm font-medium text-gray-600 dark:text-gray-400 italic hover:text-red-500 dark:hover:text-red-400 hover:scale-105 transition-all duration-300">DNY.CO.KR</span>
                  </div>
               </button>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">

@@ -56,4 +56,18 @@
       transform: translateX(-100%);
     }
   }
+
+  /* 달처럼 떠다니는 애니메이션 */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px) skewX(5deg);
+    }
+    50% {
+      transform: translateY(-8px) skewX(5deg);
+    }
+  }
+
+  .animate-float {
+    animation: float 2s ease-in-out infinite;
+  }
 } 

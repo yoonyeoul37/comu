@@ -13,14 +13,28 @@ const TermsOfService = () => {
             onClick={() => navigate('/')}
             className="flex items-center space-x-2 mb-4 hover:opacity-80 transition-opacity duration-200"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-orange-500 rounded-lg flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-200">
-              <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 20L7 4H9L13 20H11L10 16H6L5 20H3ZM7.5 14H8.5L8 12L7.5 14Z"/>
-                <path d="M15 20L19 4H21L25 20H23L22 16H18L17 20H15ZM17.5 14H18.5L18 12L17.5 14Z"/>
+            <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded-lg flex items-center justify-center shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-200">
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+                {/* 달 모양 */}
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                {/* 여성 실루엣 */}
+                <path d="M12 6c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                <path d="M12 14c-1.1 0-2 .9-2 2v2h4v-2c0-1.1-.9-2-2-2z"/>
               </svg>
             </div>
-                            <span className="text-xl font-bold text-gray-900 dark:text-white">위티</span>
-                            <span className="text-sm font-medium text-gray-600 dark:text-gray-400 ml-1">WITTY</span>
+            <div className="flex flex-col">
+              <span 
+                className="text-2xl font-bold text-gray-900 dark:text-white hover:animate-float" 
+                style={{ 
+                  fontFamily: 'Noto Sans KR, sans-serif', 
+                  transform: 'skewX(5deg)',
+                  animation: 'float 3s ease-in-out infinite'
+                }}
+              >
+                달녀들
+              </span>
+              <span className="text-sm font-medium text-gray-600 dark:text-gray-400 italic hover:text-red-500 dark:hover:text-red-400 hover:scale-105 transition-all duration-300">DNY.CO.KR</span>
+            </div>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">이용약관</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">마지막 업데이트: 2024년 1월 1일</p>
@@ -31,7 +45,7 @@ const TermsOfService = () => {
           <div className="prose prose-gray dark:prose-invert max-w-none">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">1. 서비스 이용</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              위티는 익명 커뮤니티 서비스입니다. 서비스 이용 시 다음 사항을 준수해 주세요.
+              달녀들은 익명 커뮤니티 서비스입니다. 서비스 이용 시 다음 사항을 준수해 주세요.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">2. 금지 행위</h2>
