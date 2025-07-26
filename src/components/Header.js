@@ -47,7 +47,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
                   <span className="text-white font-bold text-sm">P</span>
                 </div>
               </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+                              <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
             </button>
           </div>
 

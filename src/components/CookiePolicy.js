@@ -16,7 +16,7 @@ const CookiePolicy = () => {
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">P</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">쿠키 정책</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">마지막 업데이트: 2024년 1월 1일</p>
@@ -31,7 +31,7 @@ const CookiePolicy = () => {
               쿠키는 사용자가 웹사이트를 더 효율적으로 이용할 수 있도록 도와줍니다.
             </p>
 
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">2. Comu에서 사용하는 쿠키</h2>
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">2. 미미룸에서 사용하는 쿠키</h2>
             <div className="overflow-x-auto mb-6">
               <table className="min-w-full border border-gray-200 dark:border-gray-700">
                 <thead>
@@ -89,7 +89,7 @@ const CookiePolicy = () => {
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">5. 제3자 쿠키</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              Comu는 현재 제3자 쿠키를 사용하지 않습니다. 향후 광고 서비스 등을 위해 제3자 쿠키를 도입할 경우, 
+              미미룸은 현재 제3자 쿠키를 사용하지 않습니다. 향후 광고 서비스 등을 위해 제3자 쿠키를 도입할 경우, 
               이 정책을 업데이트하여 사전에 공지하겠습니다.
             </p>
 

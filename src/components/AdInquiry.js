@@ -16,10 +16,10 @@ const AdInquiry = () => {
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">P</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">광고문의</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">Comu에서 광고를 게재하고 싶으신가요?</p>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">미미룸에서 광고를 게재하고 싶으신가요?</p>
         </div>
 
         {/* 광고 위치 안내 */}

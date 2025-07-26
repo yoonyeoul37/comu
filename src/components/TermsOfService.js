@@ -16,7 +16,7 @@ const TermsOfService = () => {
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-sm">P</span>
             </div>
-            <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+                            <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
           </button>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">이용약관</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">마지막 업데이트: 2024년 1월 1일</p>
@@ -27,7 +27,7 @@ const TermsOfService = () => {
           <div className="prose prose-gray dark:prose-invert max-w-none">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">1. 서비스 이용</h2>
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              Comu는 익명 커뮤니티 서비스입니다. 서비스 이용 시 다음 사항을 준수해 주세요.
+              미미룸은 익명 커뮤니티 서비스입니다. 서비스 이용 시 다음 사항을 준수해 주세요.
             </p>
 
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">2. 금지 행위</h2>

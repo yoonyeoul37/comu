@@ -47,7 +47,7 @@ const Footer = () => {
                 <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-white font-bold text-sm">P</span>
                 </div>
-                <span className="text-xl font-bold text-gray-900 dark:text-white">Comu</span>
+                <span className="text-xl font-bold text-gray-900 dark:text-white">미미룸</span>
               </button>
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
                 익명으로 자유롭게 소통하는 커뮤니티입니다.
@@ -116,7 +116,7 @@ const Footer = () => {
           <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                © {currentYear} Comu. 모든 권리 보유.
+                © {currentYear} 미미룸. 모든 권리 보유.
               </p>
               <div className="flex items-center space-x-4 mt-4 md:mt-0">
                 <span className="text-xs text-gray-500 dark:text-gray-400">

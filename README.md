@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Comu - 커뮤니티 사이트
+# 미미룸 - 커뮤니티 사이트
 
 Product Hunt 스타일의 현대적이고 미니멀한 커뮤니티 플랫폼입니다.
 
@@ -64,5 +64,5 @@ http://localhost:3000
 
 MIT License 
 =======
-# comu
+# 미미룸
 >>>>>>> a5853f3a54fb25db8bea3742fadad155300d6f86
