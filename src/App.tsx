@@ -279,15 +279,15 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
-                        {selectedCategory ? `${selectedCategory} 게시글` : '인기 게시글'}
-                      </h2>
-                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                        {selectedCategory 
-                          ? `${selectedCategory} 카테고리의 게시글들을 확인하세요` 
-                          : '커뮤니티에서 가장 인기 있는 게시글들을 확인하세요'
-                        }
-                      </p>
+                                             <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
+                         {selectedCategory ? `${selectedCategory} 게시글` : '전체게시글'}
+                       </h2>
+                                             <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
+                         {selectedCategory 
+                           ? `${selectedCategory} 카테고리의 게시글들을 확인하세요` 
+                           : '커뮤니티의 모든 게시글들을 확인하세요'
+                         }
+                       </p>
                     </div>
                     <button 
                       onClick={() => {
