@@ -302,15 +302,15 @@ const HomePage: React.FC<HomePageProps> = ({ isDarkMode, toggleDarkMode }) => {
 
                   <div className="mb-6">
                     <div className="flex flex-wrap gap-2 overflow-x-auto pb-2">
-                      {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대'].map((category) => (
+                      {['친구', '가족', '이혼', '결혼', '남편', '시댁', '시모', '직장', '동료', '취업', '선배', '후배', '여자', '군대', '재혼', '여행', '알바', '주식', '도박', '사업', '미용', '요리', '운동', '쇼핑', '육아', '임신'].map((category) => (
                         <button
                           key={category}
                           onClick={() => handleCategoryClick(category)}
-                          className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap ${
-                            selectedCategory === category
-                              ? 'bg-primary-600 text-white'
-                              : 'text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
-                          }`}
+                                                     className={`px-3 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200 whitespace-nowrap ${
+                             selectedCategory === category
+                               ? 'bg-orange-500 text-white'
+                               : 'text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+                           }`}
                         >
                           {category}
                         </button>
