@@ -47,7 +47,49 @@ const PostDetail = ({ postId, isDarkMode }) => {
     }
   ]);
 
+  // 광고 데이터 상태 추가
+  const [ads, setAds] = useState([
+    // 광고가 없을 때는 빈 배열로 설정
+    // 광고를 표시하려면 아래 주석을 해제하세요
+    /*
+    {
+      id: 1,
+      title: 'qkRnjwnj 새로운 기능 제품',
+      content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.',
+      position: 'main',
+      status: 'active',
+      startDate: '2024-01-01',
+      endDate: '2024-12-31'
+    },
+    {
+      id: 2,
+      title: 'qkRnjwnj 새로운 기능 제품',
+      content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.',
+      position: 'comments',
+      status: 'active',
+      startDate: '2024-01-01',
+      endDate: '2024-12-31'
+    }
+    */
+  ]);
+
   const post = posts.find(p => p.id === postId);
+
+  // 현재 활성화된 광고 필터링 함수
+  const getActiveAds = (position) => {
+    const now = new Date();
+    return ads.filter(ad => 
+      ad.position === position && 
+      ad.status === 'active' &&
+      new Date(ad.startDate) <= now && 
+      new Date(ad.endDate) >= now
+    );
+  };
+
+  // 메인 상단 광고
+  const mainTopAds = getActiveAds('main');
+  // 댓글 사이 광고
+  const commentsAds = getActiveAds('comments');
 
   // 드롭다운 메뉴 외부 클릭 시 닫기
   const handleClickOutside = (event) => {
@@ -318,19 +360,21 @@ const PostDetail = ({ postId, isDarkMode }) => {
           {/* Main Content */}
           <div className="flex-1">
             {/* 광고 배너 */}
-            <div className="mb-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg border border-primary-200 dark:border-primary-700">
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900 dark:text-white">qkRnjwnj</h2>
-                  <p className="text-gray-600 dark:text-gray-300 mt-1">새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.</p>
+            {mainTopAds.length > 0 && mainTopAds.map(ad => (
+              <div key={ad.id} className="mb-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg border border-primary-200 dark:border-primary-700">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-gray-900 dark:text-white">{ad.title}</h2>
+                    <p className="text-gray-600 dark:text-gray-300 mt-1">{ad.content}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
             
             {/* Post Content */}
              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
@@ -779,20 +823,22 @@ const PostDetail = ({ postId, isDarkMode }) => {
             </div>
 
             {/* 댓글과 전체글 사이 광고 */}
-            <div className="mb-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg border border-primary-200 dark:border-primary-700">
-              <div className="flex items-center space-x-3">
-                <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">광고</span>
+            {commentsAds.length > 0 && commentsAds.map(ad => (
+              <div key={ad.id} className="mb-8 p-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 rounded-lg border border-primary-200 dark:border-primary-700">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">광고</span>
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-semibold text-gray-900 dark:text-white">{ad.title}</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{ad.content}</p>
+                  </div>
+                  <button className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors duration-200">
+                    투표하기
+                  </button>
                 </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 dark:text-white">qkRnjwnj 새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">새로운 기능 제안이나 투표에 참여해보세요!</p>
-                </div>
-                <button className="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors duration-200">
-                  투표하기
-                </button>
               </div>
-            </div>
+            ))}
 
             {/* 전체글 목록 */}
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">

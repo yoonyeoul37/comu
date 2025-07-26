@@ -1,9 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Footer = () => {
   const navigate = useNavigate();
   const currentYear = new Date().getFullYear();
+
+  // 스티키 광고 데이터 상태 추가
+  const [stickyAds, setStickyAds] = useState([
+    // 스티키 광고가 없을 때는 빈 배열로 설정
+    // 광고를 표시하려면 아래 주석을 해제하세요
+    /*
+    {
+      id: 1,
+      title: 'qkRnjwnj 새로운 기능 제품',
+      content: '새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.',
+      status: 'active',
+      startDate: '2024-01-01',
+      endDate: '2024-12-31'
+    }
+    */
+  ]);
+
+  // 현재 활성화된 스티키 광고 필터링
+  const getActiveStickyAds = () => {
+    const now = new Date();
+    return stickyAds.filter(ad => 
+      ad.status === 'active' &&
+      new Date(ad.startDate) <= now && 
+      new Date(ad.endDate) >= now
+    );
+  };
+
+  const activeStickyAds = getActiveStickyAds();
 
   return (
     <>
@@ -116,33 +144,35 @@ const Footer = () => {
       </footer>
 
       {/* 스티키 하단 광고 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+      {activeStickyAds.length > 0 && activeStickyAds.map(ad => (
+        <div key={ad.id} className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg z-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{ad.title}</h4>
+                  <p className="text-xs text-gray-600 dark:text-gray-400">{ad.content}</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-white">qkRnjwnj 새로운 기능 제품</h4>
-                <p className="text-xs text-gray-600 dark:text-gray-400">새로운 기능 제품을 출시하고 싶으신가요? 없는 경우, 투표를 해주세요.</p>
+              <div className="flex items-center space-x-2">
+                <button className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                  투표하기
+                </button>
+                <button className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
               </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <button className="px-3 py-1.5 bg-blue-600 text-white text-xs font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                투표하기
-              </button>
-              <button className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
             </div>
           </div>
         </div>
-      </div>
+      ))}
     </>
   );
 };
