@@ -7,9 +7,6 @@ const Footer = () => {
 
   // 스티키 광고 데이터 상태 추가
   const [stickyAds, setStickyAds] = useState([
-    // 스티키 광고가 없을 때는 빈 배열로 설정
-    // 광고를 표시하려면 아래 주석을 해제하세요
-    /*
     {
       id: 1,
       title: 'qkRnjwnj 새로운 기능 제품',
@@ -18,20 +15,21 @@ const Footer = () => {
       startDate: '2024-01-01',
       endDate: '2024-12-31'
     }
-    */
   ]);
 
-  // 현재 활성화된 스티키 광고 필터링
+  // 현재 활성화된 스티키 광고 필터링 (강제로 표시)
   const getActiveStickyAds = () => {
-    const now = new Date();
-    return stickyAds.filter(ad => 
-      ad.status === 'active' &&
-      new Date(ad.startDate) <= now && 
-      new Date(ad.endDate) >= now
-    );
+    // 날짜 필터링을 일시적으로 비활성화하고 모든 광고를 표시
+    return stickyAds.filter(ad => ad.status === 'active');
   };
 
   const activeStickyAds = getActiveStickyAds();
+  
+  // 디버그용 콘솔 로그
+  console.log('stickyAds:', stickyAds);
+  console.log('activeStickyAds:', activeStickyAds);
+  console.log('activeStickyAds.length:', activeStickyAds.length);
+  console.log('Footer component rendered');
 
   return (
     <>

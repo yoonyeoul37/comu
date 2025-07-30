@@ -49,9 +49,6 @@ const PostDetail = ({ postId, isDarkMode }) => {
 
   // 광고 데이터 상태 추가
   const [ads, setAds] = useState([
-    // 광고가 없을 때는 빈 배열로 설정
-    // 광고를 표시하려면 아래 주석을 해제하세요
-    /*
     {
       id: 1,
       title: 'qkRnjwnj 새로운 기능 제품',
@@ -70,19 +67,16 @@ const PostDetail = ({ postId, isDarkMode }) => {
       startDate: '2024-01-01',
       endDate: '2024-12-31'
     }
-    */
   ]);
 
   const post = posts.find(p => p.id === postId);
 
   // 현재 활성화된 광고 필터링 함수
   const getActiveAds = (position) => {
-    const now = new Date();
+    // 날짜 필터링을 일시적으로 비활성화하고 모든 광고를 표시
     return ads.filter(ad => 
       ad.position === position && 
-      ad.status === 'active' &&
-      new Date(ad.startDate) <= now && 
-      new Date(ad.endDate) >= now
+      ad.status === 'active'
     );
   };
 
@@ -576,6 +570,35 @@ const PostDetail = ({ postId, isDarkMode }) => {
                  </div>
                </div>
 
+              {/* 본문 위 광고 */}
+              {mainTopAds.length > 0 && mainTopAds.map(ad => (
+                <div key={ad.id} className="mb-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{ad.title}</h4>
+                        <p className="text-xs text-gray-600 dark:text-gray-400">{ad.content}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200">
+                        투표하기
+                      </button>
+                      <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+
               {/* Post Content */}
               <div className="prose dark:prose-invert max-w-none">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -701,6 +724,35 @@ const PostDetail = ({ postId, isDarkMode }) => {
 
                              {/* Comments List */}
                <div className="space-y-6">
+                 {/* 댓글 중간 광고 */}
+                 {commentsAds.length > 0 && commentsAds.map(ad => (
+                   <div key={ad.id} className="my-6 p-4 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-lg border border-green-200 dark:border-green-700">
+                     <div className="flex items-center justify-between">
+                       <div className="flex items-center space-x-3">
+                         <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-600 rounded-lg flex items-center justify-center">
+                           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                           </svg>
+                         </div>
+                         <div>
+                           <h4 className="text-sm font-semibold text-gray-900 dark:text-white">{ad.title}</h4>
+                           <p className="text-xs text-gray-600 dark:text-gray-400">{ad.content}</p>
+                         </div>
+                       </div>
+                       <div className="flex items-center space-x-2">
+                         <button className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 transition-colors duration-200">
+                           투표하기
+                         </button>
+                         <button className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200">
+                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                           </svg>
+                         </button>
+                       </div>
+                     </div>
+                   </div>
+                 ))}
+                 
                  {comments.map((comment) => (
                    <div key={comment.id} className="border-b border-gray-200 dark:border-gray-700 pb-6 last:border-b-0">
                      <div className="flex items-start space-x-3">
